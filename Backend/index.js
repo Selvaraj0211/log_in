@@ -1,35 +1,49 @@
-const express = require('express')
+const express = require('express');
+const cors = require('cors');
+const app = express();
 
-const cors = require('cors')
+app.use(express.json());
+app.use(express.urlencoded({ extended: true }));
+app.use(cors());
 
-const app = express()
 
-const tempDB = [
-  {
-    email: "abc@gmail.com",
-    password: "12345",
-  },
+const users = [
+  { username: "selva", password: "123" }
 ];
 
-let username = "selva"
-let password = 123
-app.use(express.json())
-app.use(express.urlencoded({ extended: true }))
-app.use(cors())
-
+// login
 app.post("/login", function (req, res) {
+  const { username, password } = req.body;
 
-    console.log(req.body.username)
-    console.log(req.body.password)
-    
+  const matchedUser = users.find(
+    (user) => user.username === username && user.password === password
+  );
 
-    if (req.body.username === username && req.body.password == password) {
-        res.send(true)
-    } else {
-        res.send(false)
-    }
-})
+  if (matchedUser) {
+    res.send(true); 
+  } else {
+    res.send(false); 
+  }
+});
 
+// SIGNUP
+app.post("/signup", function (req, res) {
+  const { email, username, password } = req.body;
+
+  // Check already exists
+  const existingUser = users.find(user => user.username === username);
+  if (existingUser) {
+    return res.status(400).send("User already exists");
+  }
+
+  // Add new sign in
+  users.push({ email, username, password });
+  console.log("New user registered:", { email, username });
+
+  res.status(201).send("User created");
+});
+
+// Server start
 app.listen(3000, function () {
-    console.log("Server started..")
-})
+  console.log("Server started on http://localhost:3000");
+});
