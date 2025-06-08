@@ -15,7 +15,7 @@ const Signup = () => {
     const handleSignup = async (e) => {
         e.preventDefault();
         try {
-            const response = await axios.post("http://localhost:3000/signup", user);
+            const response = await axios.post("https://log-in-azlg.onrender.com", user);
             alert("Signup successful!");
             console.log("User registered:", response.data);
 

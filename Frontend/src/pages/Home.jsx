@@ -15,7 +15,7 @@ const Home = () => {
         Setpass(e.target.value )
     }
     function check() {
-    axios.post("http://localhost:3000/login", {
+    axios.post("https://log-in-azlg.onrender.com", {
         username: user,
         password: pass
     }).then(function (data) {
