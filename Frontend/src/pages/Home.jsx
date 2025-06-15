@@ -1,30 +1,32 @@
 import React from 'react';
 import { useState } from 'react';
 import axios from 'axios'
-import { useNavigate } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
+
+
 
 const Home = () => {
-    const [user,Setuser]= useState("")
-    const [pass,Setpass]= useState("")
+    const [user, Setuser] = useState("")
+    const [pass, Setpass] = useState("")
     const navigate = useNavigate();
 
-    function handleuser(e){
-        Setuser(e.target.value )
+    function handleuser(e) {
+        Setuser(e.target.value)
     }
-    function handlepass(e){
-        Setpass(e.target.value )
+    function handlepass(e) {
+        Setpass(e.target.value)
     }
     function check() {
-    axios.post("https://log-in-azlg.onrender.com/login", {
-        username: user,
-        password: pass
-    }).then(function (data) {
-        console.log(data);
-        if (data.data === true){
-                
-               navigate ("/success")
+        axios.post("https://log-in-azlg.onrender.com/login", {
+            username: user,
+            password: pass
+        }).then(function (data) {
+            console.log(data);
+            if (data.data === true) {
+
+                navigate("/success")
             }
-            else{
+            else {
                 navigate("/fail")
             }
         })
@@ -38,7 +40,7 @@ const Home = () => {
 
 
                     <div
-                    className="flex flex-col gap-3 w-full">
+                        className="flex flex-col gap-3 w-full">
                         <input
                             className="border rounded border-gray-600 bg-gray-800 text-sm text-gray-400 p-2 focus:outline-none focus:ring-1 focus:ring-gray-400"
                             type="text"
@@ -79,7 +81,11 @@ const Home = () => {
                         Forgot password?
                     </div>
                 </div>
-                <p className='text-white py-4 w-80 text-center border my-5 rounded border-gray-600'>Don't have an account? <span className='text-blue-500'><a href="/signup">sign up</a></span>
+                <p className='text-white py-4 w-80 text-center border my-5 rounded border-gray-600'>Don't have an account? <span className='text-blue-500'>
+                    <Link to="/signup">
+                        Sign up
+                    </Link>
+                </span>
                 </p>
                 <p className='text-white text-sm'>Get the app.</p>
 
@@ -127,10 +133,10 @@ const Home = () => {
                         <p>Meta Verified</p>
                     </div>
                     <div className='flex text-center gap-6 justify-center text-gray-400 text-xs  mt-6 mb-8'>
-                       <select>
-                        <option>English</option>
-                        <option>தமிழ்</option>
-                       </select>
+                        <select>
+                            <option>English</option>
+                            <option>தமிழ்</option>
+                        </select>
                         <p className=''>&copy; 2025 Instagram from Meta</p>
                     </div>
                 </div>
